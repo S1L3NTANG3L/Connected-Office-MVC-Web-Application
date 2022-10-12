@@ -38,7 +38,6 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             return View(category);
         }
 
@@ -55,6 +54,7 @@ namespace ConnectedOffice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDescription,DateCreated")] Category category)
         {
+            category.DateCreated = DateTime.Now;
             category.CategoryId = Guid.NewGuid();
             _categoryService.AddCategory(category);
             return RedirectToAction("Index");
@@ -67,7 +67,6 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             var category = _categoryService.GetCategoryById(id);
             if (category == null)
             {
@@ -112,13 +111,11 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             var category = _categoryService.GetCategoryById(id);
             if (category == null)
             {
                 return NotFound();
             }
-
             return View(category);
         }
 

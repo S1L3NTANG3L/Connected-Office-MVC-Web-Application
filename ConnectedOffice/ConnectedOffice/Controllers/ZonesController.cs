@@ -54,6 +54,7 @@ namespace ConnectedOffice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ZoneId,ZoneName,ZoneDescription,DateCreated")] Zone zone)
         {
+            zone.DateCreated = DateTime.Now;
             zone.ZoneId = Guid.NewGuid();
             _zoneService.AddZone(zone);
             return RedirectToAction("Index");
@@ -86,7 +87,6 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             try
             {
                 _zoneService.UpdateZone(zone);
@@ -103,7 +103,6 @@ namespace ConnectedOffice.Controllers
                 }
             }
             return RedirectToAction("Index");
-
         }
 
 
@@ -114,13 +113,11 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             var zone = _zoneService.GetZoneById(id);
             if (zone == null)
             {
                 return NotFound();
             }
-
             return View(zone);
         }
 

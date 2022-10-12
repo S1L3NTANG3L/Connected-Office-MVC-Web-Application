@@ -19,7 +19,7 @@ namespace ConnectedOffice.Data.Repositories
             }
             try
             {
-                _context.AddAsync(entity);
+                _context.Add(entity);
                 _context.SaveChanges();//Change
             }
             catch (Exception ex)

@@ -46,7 +46,6 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             return View(device);
         }
 
@@ -65,11 +64,10 @@ namespace ConnectedOffice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DeviceId,DeviceName,CategoryId,ZoneId,Status,IsActive,DateCreated")] Device device)
         {
+            device.DateCreated = DateTime.Now;
             device.DeviceId = Guid.NewGuid();
             _deviceService.AddDevice(device);
             return RedirectToAction("Index");
-
-
         }
 
         // GET: Devices/Edit/5
@@ -117,7 +115,6 @@ namespace ConnectedOffice.Controllers
                 }
             }
             return RedirectToAction("Index");
-
         }
 
         // GET: Devices/Delete/5
@@ -127,13 +124,11 @@ namespace ConnectedOffice.Controllers
             {
                 return NotFound();
             }
-
             var device = _deviceService.GetDeviceById(id);
             if (device == null)
             {
                 return NotFound();
             }
-
             return View(device);
         }
 
