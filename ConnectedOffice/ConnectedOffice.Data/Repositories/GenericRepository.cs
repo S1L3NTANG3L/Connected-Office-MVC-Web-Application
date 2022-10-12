@@ -42,7 +42,8 @@ namespace ConnectedOffice.Data.Repositories
         {
             try
             {
-                _context.Set<T>().Remove(entity);
+                _context.Remove(entity);
+                _context.SaveChanges();//Change
             }
             catch (Exception ex)
             {
